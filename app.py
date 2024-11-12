@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 
+spacy.load('en_core_web_sm')
 
 # Download NLTK data
 nltk.download('punkt')
