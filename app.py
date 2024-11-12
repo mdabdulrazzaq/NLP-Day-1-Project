@@ -1,10 +1,11 @@
 
 import streamlit as st
+import spacy
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-import spacy
-import nltk
+
 
 # Download NLTK data
 nltk.download('punkt')
