@@ -5,12 +5,14 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 
-
-# Download NLTK data
+# Download NLTK resources
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
+# Download the missing 'punkt_tab' data
+nltk.download('punkt_tab') # This line was added to download the required resource
 
+# Initialize tools
 stop_words = set(stopwords.words('english'))
 ps = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
