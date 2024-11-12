@@ -9,6 +9,8 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
+# Download the missing 'punkt_tab' data
+nltk.download('punkt_tab') # This line was added to download the required resource
 
 # Initialize tools
 stop_words = set(stopwords.words('english'))
@@ -23,10 +25,10 @@ def clean_text(text):
     tokens_no_stop = [word for word in tokens if word.lower() not in stop_words]
     
     # Stemming
-    stemmed = [ps.stem(word) for word in tokens_no_stop]
+    stemmed = [ps.stem(word) for word in tokens]
     
     # Lemmatization
-    lemmatized = [lemmatizer.lemmatize(word) for word in tokens_no_stop]
+    lemmatized = [lemmatizer.lemmatize(word) for word in tokens]
     
     return {
         'original': text,
@@ -38,7 +40,6 @@ def clean_text(text):
 
 # Streamlit app layout
 st.title("Text Preprocessing")
-
 st.write("""
     This app demonstrates the following text preprocessing techniques:
     - **Tokenization**: Splitting text into individual words.
@@ -47,32 +48,23 @@ st.write("""
     - **Lemmatization**: Converting words to their base form considering context.
 """)
 
-# Default text
-default_text = "NLTK is a powerful library for natural language processing."
-
 # Input for raw text
-raw_text = st.text_area("Enter Text (or use the default)", default_text)
+raw_text = st.text_area("Enter Text", "NLTK is a powerful library for natural language processing.")
 
 if raw_text:
     # Process the text
     cleaned_data = clean_text(raw_text)
     
-    # Display Results
+    # Display results
     st.subheader("Original Text")
     st.write(cleaned_data['original'])
     
-    st.subheader("Tokens (Word Splitting)")
-    st.write(f"Tokenized text: {cleaned_data['tokens']}")
-    
+    st.subheader("Tokens")
+    st.write(cleaned_data['tokens'])
     st.subheader("Tokens after Stopword Removal")
-    st.write(f"Text after removing common stopwords: {cleaned_data['tokens_no_stop']}")
-    
+    st.write(f"Text after removing common stopwords: {cleaned_data['tokens_no_stop']}")    
     st.subheader("Stemmed Tokens")
-    st.write(f"Stemming result: {cleaned_data['stemmed']}")
+    st.write(cleaned_data['stemmed'])
     
     st.subheader("Lemmatized Tokens")
-    st.write(f"Lemmatization result: {cleaned_data['lemmatized']}")
-    
-# Optionally, include a button for the user to reset the input
-if st.button("Reset"):
-    st.text_area("Enter Text (or use the default)", "")
+    st.write(cleaned_data['lemmatized'])
