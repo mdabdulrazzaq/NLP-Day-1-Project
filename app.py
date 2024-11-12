@@ -62,7 +62,7 @@ if raw_text:
     st.subheader("Tokens")
     st.write(cleaned_data['tokens'])
     st.subheader("Tokens after Stopword Removal")
-    st.write(f"Text after removing common stopwords: {cleaned_data['tokens_no_stop']}")    
+    st.write(cleaned_data['tokens_no_stop'])    
     st.subheader("Stemmed Tokens")
     st.write(cleaned_data['stemmed'])
     
