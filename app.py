@@ -1,47 +1,59 @@
-
 import streamlit as st
-import spacy
 import nltk
-from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 
-spacy.load('en_core_web_sm')
-
-# Download NLTK data
+# Initialize tools
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-# Initialize tools
 stop_words = set(stopwords.words('english'))
 ps = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
-nlp = spacy.load("en_core_web_sm")
 
-# Streamlit UI
-st.title("Text Preprocessing Demo")
-user_input = st.text_area("Enter your text:", "Natural Language Processing is an exciting field. It's full of challenges!")
+def clean_text(text):
+    # Tokenization
+    tokens = word_tokenize(text)
+    
+    # Stop-word removal
+    tokens = [word for word in tokens if word.lower() not in stop_words]
+    
+    # Stemming
+    stemmed = [ps.stem(word) for word in tokens]
+    
+    # Lemmatization
+    lemmatized = [lemmatizer.lemmatize(word) for word in tokens]
+    
+    return {
+        'original': text,
+        'tokens': tokens,
+        'stemmed': stemmed,
+        'lemmatized': lemmatized
+    }
 
-if st.button("Process Text"):
-    tokens = word_tokenize(user_input)
-    filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
-    stemmed_tokens = [ps.stem(word) for word in filtered_tokens]
-    lemmatized_tokens = [lemmatizer.lemmatize(word) for word in filtered_tokens]
+# Streamlit app layout
+st.title("Text Preprocessing")
+st.write("This app cleans the input text by performing tokenization, stopword removal, stemming, and lemmatization.")
 
-    st.subheader("Tokenized Text")
-    st.write(tokens)
+# Input for raw text
+raw_text = st.text_area("Enter Text", "NLTK is a powerful library for natural language processing.")
 
-    st.subheader("Filtered Text (No Stopwords)")
-    st.write(filtered_tokens)
-
-    st.subheader("Stemmed Text")
-    st.write(stemmed_tokens)
-
-    st.subheader("Lemmatized Text")
-    st.write(lemmatized_tokens)
-
-    st.subheader("Named Entities (NER)")
-    doc = nlp(user_input)
-    entities = [(entity.text, entity.label_) for entity in doc.ents]
-    st.write(entities)
+if raw_text:
+    # Process the text
+    cleaned_data = clean_text(raw_text)
+    
+    # Display results
+    st.subheader("Original Text")
+    st.write(cleaned_data['original'])
+    
+    st.subheader("Tokens")
+    st.write(cleaned_data['tokens'])
+    
+    st.subheader("Stemmed Tokens")
+    st.write(cleaned_data['stemmed'])
+    
+    st.subheader("Lemmatized Tokens")
+    st.write(cleaned_data['lemmatized'])
