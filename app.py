@@ -9,8 +9,7 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
-# Download the missing 'punkt_tab' data
-nltk.download('punkt_tab') # This line was added to download the required resource
+nltk.download('punkt_tab')  # This line was added to download the required resource
 
 # Initialize tools
 stop_words = set(stopwords.words('english'))
@@ -51,20 +50,26 @@ st.write("""
 # Input for raw text
 raw_text = st.text_area("Enter Text", "")
 
-if raw_text:
-    # Process the text
-    cleaned_data = clean_text(raw_text)
-    
-    # Display results
-    st.subheader("Original Text")
-    st.write(cleaned_data['original'])
-    
-    st.subheader("Tokens")
-    st.write(cleaned_data['tokens'])
-    st.subheader("Tokens after Stopword Removal")
-    st.write(cleaned_data['tokens_no_stop'])    
-    st.subheader("Stemmed Tokens")
-    st.write(cleaned_data['stemmed'])
-    
-    st.subheader("Lemmatized Tokens")
-    st.write(cleaned_data['lemmatized'])
+# Button to apply text preprocessing
+if st.button("Apply Preprocessing"):
+    if raw_text:
+        # Process the text
+        cleaned_data = clean_text(raw_text)
+        
+        # Display results
+        st.subheader("Original Text")
+        st.write(cleaned_data['original'])
+        
+        st.subheader("Tokens")
+        st.write(cleaned_data['tokens'])
+        
+        st.subheader("Tokens after Stopword Removal")
+        st.write(cleaned_data['tokens_no_stop'])    
+        
+        st.subheader("Stemmed Tokens")
+        st.write(cleaned_data['stemmed'])
+        
+        st.subheader("Lemmatized Tokens")
+        st.write(cleaned_data['lemmatized'])
+    else:
+        st.warning("Please enter some text to process.")
