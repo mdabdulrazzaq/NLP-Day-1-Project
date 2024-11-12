@@ -49,7 +49,7 @@ st.write("""
 """)
 
 # Input for raw text
-raw_text = st.text_area("Enter Text", "NLTK is a powerful library for natural language processing.")
+raw_text = st.text_area("Enter Text", "")
 
 if raw_text:
     # Process the text
