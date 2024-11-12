@@ -41,7 +41,6 @@ Lemmatization also reduces words to their base form but uses linguistic rules to
 1. Open `day1_text_preprocessing.ipynb` in Jupyter Notebook or any other compatible editor.
 2. Run the cells to see the output of each text preprocessing step.
 
-### Streamlit App
-1. Install the required libraries:
-   ```bash
-   pip install nltk spacy
+## **Streamlit app link**:
+  - **Link**: [NLP Day 1: Text Preprocessing - Streamlit App](https://nlp-day-1-textprepper.streamlit.app/)
+
