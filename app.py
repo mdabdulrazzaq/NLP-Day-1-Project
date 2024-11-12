@@ -40,11 +40,11 @@ def clean_text(text):
 st.title("Text Preprocessing")
 
 st.write("""
-    This app demonstrates various text preprocessing techniques, including:
+    This app demonstrates the following text preprocessing techniques:
     - **Tokenization**: Splitting text into individual words.
-    - **Stopword Removal**: Removing common words that do not add much value.
+    - **Stopword Removal**: Removing common words like 'the', 'is', etc.
     - **Stemming**: Reducing words to their root form.
-    - **Lemmatization**: Converting words to their base form, considering the context.
+    - **Lemmatization**: Converting words to their base form considering context.
 """)
 
 # Default text
@@ -63,30 +63,15 @@ if raw_text:
     
     st.subheader("Tokens (Word Splitting)")
     st.write(f"Tokenized text: {cleaned_data['tokens']}")
-    st.write("""
-        **Explanation**: Tokenization splits the text into individual words or tokens, 
-        which helps in analyzing the structure of the text.
-    """)
     
     st.subheader("Tokens after Stopword Removal")
     st.write(f"Text after removing common stopwords: {cleaned_data['tokens_no_stop']}")
-    st.write("""
-        **Explanation**: Stop words (such as 'is', 'a', 'the') are removed because they do not carry significant meaning 
-        in analysis and might add noise to the text.
-    """)
     
     st.subheader("Stemmed Tokens")
     st.write(f"Stemming result: {cleaned_data['stemmed']}")
-    st.write("""
-        **Explanation**: Stemming reduces words to their root form (e.g., 'running' becomes 'run').
-        This helps group similar words together.
-    """)
     
     st.subheader("Lemmatized Tokens")
     st.write(f"Lemmatization result: {cleaned_data['lemmatized']}")
-    st.write("""
-        **Explanation**: Lemmatization reduces words to their base form considering the context (e.g., 'better' becomes 'good').
-    """)
     
 # Optionally, include a button for the user to reset the input
 if st.button("Reset"):
